@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UT Unit Toilet · 整體盥洗設備系統導入方案 · 惠強 DESIGN AND BUILD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --vermillion:#D64518;
+  --vermillion-deep:#B23A12;
+  --vermillion-bright:#EE6A2E;
+  --vermillion-tint:#FBEBE3;
+  --navy:#1E3A5F;
+  --navy-deep:#142A45;
+  --navy-bright:#2F5C8F;
+  --navy-tint:#EAF0F6;
+
+  --ink:#16202E;
+  --ink-85:rgba(22,32,46,.85);
+  --ink-70:rgba(22,32,46,.70);
+  --ink-55:rgba(22,32,46,.55);
+  --ink-40:rgba(22,32,46,.40);
+  --ink-14:rgba(22,32,46,.14);
+  --ink-08:rgba(22,32,46,.08);
+
+  --paper:#ffffff;
+  --paper-2:#F7F5F1;
+  --hairline:var(--ink-14);
+
+  --font:"Poppins","Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --font-cjk:"Noto Sans TC","Poppins",sans-serif;
+
+  --t-hero:clamp(36px,4.4vw,62px);
+  --t-h1:clamp(27px,3vw,44px);
+  --t-h2:clamp(22px,2.2vw,30px);
+  --t-h3:clamp(18px,1.6vw,23px);
+  --t-lead:clamp(17px,1.45vw,22px);
+  --t-body:clamp(16px,1.25vw,19px);
+  --t-cap:clamp(12px,.9vw,13px);
+  --t-num:clamp(34px,3.6vw,54px);
+
+  --lh-tight:1.08;
+  --lh-snug:1.32;
+  --lh-normal:1.68;
+
+  --sidebar-w:clamp(260px,21vw,310px);
+  --sidebar-wc:74px;
+  --sb-gap:clamp(14px,1.4vw,22px);
+  --content-pad:clamp(28px,5vw,96px);
+  --sec-y:clamp(56px,7vw,116px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{max-width:100%;display:block}
+
+/* ===== Reading progress ===== */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--vermillion);z-index:90;transition:width .12s linear}
+
+/* ===================== SIDEBAR (floating · collapsible) ===================== */
+#sidebar{position:fixed;top:var(--sb-gap);left:var(--sb-gap);width:var(--sidebar-w);height:calc(100vh - var(--sb-gap)*2);background:var(--paper);border:1px solid var(--hairline);border-radius:8px;box-shadow:0 18px 48px rgba(22,32,46,.13),0 2px 8px rgba(22,32,46,.06);display:flex;flex-direction:column;z-index:80;overflow:hidden;transition:width .32s cubic-bezier(.4,0,.2,1)}
+body.sb-collapsed #sidebar{width:var(--sidebar-wc)}
+.sb-head{position:relative;padding:clamp(22px,2.4vw,30px) clamp(22px,1.8vw,30px) clamp(16px,1.6vw,22px);padding-right:54px;border-bottom:1px solid var(--hairline)}
+body.sb-collapsed .sb-head{padding:14px 0;min-height:60px}
+
+/* collapse toggle */
+.sb-collapse{position:absolute;top:16px;right:16px;width:30px;height:30px;border:1px solid var(--hairline);background:var(--paper);border-radius:5px;display:grid;place-items:center;cursor:pointer;color:var(--ink-55);transition:background .18s,color .18s,border-color .18s;z-index:3}
+.sb-collapse:hover{background:var(--vermillion);border-color:var(--vermillion);color:#fff}
+.sb-collapse svg{width:16px;height:16px;transition:transform .32s cubic-bezier(.4,0,.2,1)}
+body.sb-collapsed .sb-collapse{right:50%;transform:translateX(50%)}
+body.sb-collapsed .sb-collapse svg{transform:rotate(180deg)}
+
+/* collapsed = floating button only */
+body.sb-collapsed #sidebar{width:auto;height:auto}
+body.sb-collapsed .sb-logo,
+body.sb-collapsed .sb-eyebrow,
+body.sb-collapsed .sb-title,
+body.sb-collapsed .sb-sub,
+body.sb-collapsed .sb-foot,
+body.sb-collapsed .sb-tools,
+body.sb-collapsed .sb-nav,
+body.sb-collapsed .sb-link .sb-tx{display:none}
+body.sb-collapsed .sb-head{padding:0;border-bottom:0;min-height:0}
+body.sb-collapsed .sb-collapse{position:static;transform:none;width:46px;height:46px;border:0}
+body.sb-collapsed .sb-collapse:hover{background:var(--vermillion);color:#fff}
+.sb-logo{height:30px;width:auto;margin-bottom:16px}
+.sb-eyebrow{font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--vermillion);margin-bottom:8px}
+.sb-title{font-family:var(--font);font-weight:600;font-size:clamp(17px,1.4vw,20px);line-height:1.12;letter-spacing:-.01em;color:var(--ink)}
+.sb-sub{font-family:var(--font-cjk);font-weight:500;font-size:13px;line-height:1.45;color:var(--ink-55);margin-top:7px}
+
+.sb-nav{flex:1;overflow-y:auto;padding:clamp(12px,1.4vw,18px) 0;scrollbar-width:thin;scrollbar-color:var(--ink-14) transparent}
+.sb-nav::-webkit-scrollbar{width:6px}
+.sb-nav::-webkit-scrollbar-thumb{background:var(--ink-14);border-radius:3px}
+.sb-link{display:flex;align-items:baseline;gap:12px;padding:9px clamp(22px,1.8vw,30px);text-decoration:none;border-left:2px solid transparent;transition:background .18s,border-color .18s}
+.sb-link:hover{background:var(--paper-2)}
+.sb-link .sb-no{flex:0 0 auto;font-family:var(--font);font-weight:600;font-size:12px;letter-spacing:.06em;color:var(--ink-40);font-variant-numeric:tabular-nums;width:22px}
+.sb-link .sb-tx{display:flex;flex-direction:column;gap:1px;min-width:0}
+.sb-link .sb-cjk{font-family:var(--font-cjk);font-weight:500;font-size:14px;line-height:1.25;color:var(--ink-70);transition:color .18s}
+.sb-link .sb-en{font-family:var(--font);font-weight:500;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-40);transition:color .18s}
+.sb-link.active{border-left-color:var(--vermillion);background:var(--vermillion-tint)}
+.sb-link.active .sb-no{color:var(--vermillion)}
+.sb-link.active .sb-cjk{color:var(--ink);font-weight:700}
+.sb-link.active .sb-en{color:var(--vermillion-deep)}
+
+.sb-foot{padding:16px clamp(22px,1.8vw,30px);border-top:1px solid var(--hairline);font-family:var(--font-cjk);font-size:12px;line-height:1.5;color:var(--ink-55)}
+.sb-foot .who{font-weight:700;color:var(--ink)}
+.sb-foot .ln{display:block}
+.sb-foot .mono{font-family:var(--font);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+
+/* reorder tools */
+.sb-tools{padding:10px clamp(22px,1.8vw,30px);border-bottom:1px solid var(--hairline);display:flex}
+body.sb-collapsed .sb-tools{display:none}
+.sb-reorder{display:flex;align-items:center;gap:8px;width:100%;justify-content:center;padding:9px 12px;border:1px solid var(--hairline);background:var(--paper);border-radius:5px;cursor:pointer;font-family:var(--font-cjk);font-weight:600;font-size:13px;color:var(--ink-70);transition:background .18s,color .18s,border-color .18s}
+.sb-reorder:hover{border-color:var(--ink-40);color:var(--ink)}
+.sb-reorder svg{width:15px;height:15px;flex:0 0 auto}
+.sb-reorder.active{background:var(--vermillion);border-color:var(--vermillion);color:#fff}
+.sb-grip{display:none;flex:0 0 auto;margin-left:auto;color:var(--ink-40);align-items:center}
+.sb-grip svg{width:16px;height:16px}
+.sb-nav.reordering .sb-link{cursor:grab;border-left-color:transparent;background:var(--paper)}
+.sb-nav.reordering .sb-link:hover{background:var(--paper-2)}
+.sb-nav.reordering .sb-link[href="#sec-00"]{opacity:.42;cursor:not-allowed}
+.sb-nav.reordering .sb-grip{display:flex}
+.sb-nav.reordering .sb-link[href="#sec-00"] .sb-grip{display:none}
+.sb-link.dragging{opacity:.65;cursor:grabbing}
+.sb-nav.reordering .sb-link.dragging{background:var(--vermillion-tint)}
+
+/* mobile sidebar toggle */
+#sbToggle{display:none}
+
+/* ===================== MAIN ===================== */
+main{margin-left:0}
+body.sb-collapsed main{margin-left:0}
+.sec{padding:var(--sec-y) var(--content-pad);scroll-margin-top:0;border-bottom:1px solid var(--hairline)}
+.sec.alt{background:var(--paper)}
+.wrap{max-width:1120px;margin:0 auto}
+
+/* section head */
+.chead{display:flex;flex-direction:column;gap:13px;margin-bottom:clamp(30px,3.6vw,52px)}
+.eyebrow{font-family:var(--font);font-weight:600;font-size:var(--t-cap);letter-spacing:.16em;text-transform:uppercase;color:var(--vermillion)}
+.eyebrow-cjk{font-family:var(--font-cjk);font-weight:600;font-size:var(--t-cap);letter-spacing:.1em;color:var(--vermillion)}
+.h1{font-family:var(--font-cjk);font-weight:700;font-size:var(--t-h1);line-height:var(--lh-tight);letter-spacing:.005em;color:var(--ink)}
+.h1 .en{display:inline-block;font-family:var(--font);font-weight:500;font-size:.4em;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-40);margin-left:.55em;vertical-align:.18em}
+.h2{font-family:var(--font-cjk);font-weight:700;font-size:var(--t-h2);line-height:var(--lh-snug);color:var(--ink)}
+.h3{font-family:var(--font-cjk);font-weight:700;font-size:var(--t-h3);line-height:var(--lh-snug);color:var(--ink)}
+.lead{font-family:var(--font-cjk);font-weight:400;font-size:var(--t-lead);line-height:var(--lh-normal);color:var(--ink-70)}
+.body{font-family:var(--font-cjk);font-weight:400;font-size:var(--t-body);line-height:var(--lh-normal);color:var(--ink-70)}
+.en{font-family:var(--font)}
+strong{font-weight:700;color:var(--ink)}
+.mono{font-family:var(--font);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.col{display:flex;flex-direction:column}
+.rule-ink{height:2px;background:var(--ink);border:0;width:56px}
+.rule-brand{height:2px;background:var(--vermillion);border:0;width:56px}
+.rule{height:1px;background:var(--hairline);border:0;width:100%}
+
+/* split layouts */
+.split{display:grid;gap:clamp(28px,4vw,68px);align-items:center}
+.split.s5050{grid-template-columns:1fr 1fr}
+.split.s6040{grid-template-columns:1.1fr .9fr}
+.split.s4060{grid-template-columns:.9fr 1.1fr}
+.split.top{align-items:start}
+
+/* figures */
+.figure{margin:0;overflow:hidden}
+.figure img{width:100%;height:auto;object-fit:contain}
+.figure.framed{background:transparent;border:0;padding:clamp(18px,2vw,32px)}
+.cap{margin-top:12px;font-family:var(--font);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-40)}
+
+/* steps / cards */
+.steps{display:grid;gap:clamp(18px,2vw,28px)}
+.step{display:flex;flex-direction:column;gap:7px;padding-top:16px;border-top:1px solid var(--hairline)}
+.step .n{font-family:var(--font);font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--vermillion)}
+.step .t{font-family:var(--font-cjk);font-weight:700;font-size:var(--t-h3);line-height:var(--lh-snug);color:var(--ink)}
+.step .d{font-family:var(--font-cjk);font-weight:400;font-size:var(--t-body);line-height:var(--lh-normal);color:var(--ink-70)}
+.step .d .en{font-family:var(--font);font-weight:500;color:var(--ink-55);font-size:.86em;letter-spacing:.04em}
+
+.pillar{display:flex;flex-direction:column;gap:12px;padding-top:22px;border-top:2px solid var(--vermillion)}
+.pillar .n{font-family:var(--font);font-weight:600;font-size:var(--t-num);line-height:1;color:var(--vermillion);font-variant-numeric:tabular-nums}
+.pillar .t{font-family:var(--font-cjk);font-weight:700;font-size:var(--t-h3);color:var(--ink);line-height:var(--lh-snug)}
+.pillar .t .sub{display:block;font-family:var(--font);font-weight:500;font-size:.56em;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-40);margin-top:6px}
+.pillar .d{font-family:var(--font-cjk);font-weight:400;font-size:var(--t-body);color:var(--ink-70);line-height:var(--lh-normal)}
+
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(22px,2.6vw,40px)}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,2.2vw,32px)}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(24px,3vw,48px)}
+
+/* callouts */
+.callout{padding:clamp(18px,1.9vw,26px) clamp(22px,2.3vw,32px);background:var(--vermillion-tint);border-left:4px solid var(--vermillion);font-family:var(--font-cjk);font-weight:400;font-size:var(--t-body);line-height:var(--lh-normal);color:var(--ink-85)}
+.callout .cite{display:block;margin-top:11px;font-family:var(--font);font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--vermillion)}
+.callout.navy{background:var(--navy-tint);border-left-color:var(--navy)}
+.callout.navy .cite{color:var(--navy)}
+.callout.warn{background:#FBE9E6;border-left-color:#C62828}
+.callout.warn strong{color:#C62828}
+
+/* bullets */
+.bullets{display:flex;flex-direction:column;gap:13px}
+.bullet{display:flex;gap:13px;align-items:baseline;font-family:var(--font-cjk);font-size:var(--t-body);line-height:var(--lh-snug);color:var(--ink-85)}
+.bullet::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--vermillion);transform:translateY(2px)}
+.bullet.navy::before{background:var(--navy)}
+
+/* compare table */
+.compare{display:flex;flex-direction:column}
+.crow{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:clamp(14px,2vw,28px);padding:15px 0;border-top:1px solid var(--hairline);align-items:center}
+.crow.head{border-top:0}
+.crow.head span{font-family:var(--font);font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-40)}
+.crow .k{font-family:var(--font-cjk);font-weight:700;font-size:var(--t-body);color:var(--ink)}
+.crow .v{font-family:var(--font-cjk);font-weight:500;font-size:var(--t-body);color:var(--ink-70)}
+.crow .bad{color:#C62828;font-weight:700}
+.crow .good{color:#1F8A4C;font-weight:700}
+.crow .warn{color:var(--vermillion-deep);font-weight:700}
+
+/* ===== TCO animated chart ===== */
+.tco{background:transparent;border:1px solid var(--hairline);padding:clamp(20px,2.4vw,36px);overflow:visible}
+.tco-top{display:flex;flex-wrap:wrap;gap:12px 26px;align-items:baseline;justify-content:space-between;margin-bottom:clamp(12px,1.6vw,20px)}
+.tco-legend{display:flex;flex-wrap:wrap;gap:20px}
+.tco-lg{display:flex;align-items:center;gap:9px;font-family:var(--font-cjk);font-weight:500;font-size:14px;color:var(--ink-70)}
+.tco-lg i{width:24px;height:3px;border-radius:2px;flex:0 0 auto}
+.tco-lg.trad i{background:var(--navy)}
+.tco-lg.ut i{background:var(--vermillion)}
+.tco-ytitle{font-family:var(--font);font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-40)}
+.tco-plot{width:100%}
+.tco-plot svg{width:100%;height:auto;display:block;overflow:visible}
+.tco-grid{stroke:var(--ink-14);stroke-width:1}
+.tco-axis{stroke:var(--ink-40);stroke-width:1.5}
+.tco-tick{font-family:var(--font);font-size:13px;fill:var(--ink-55);font-variant-numeric:tabular-nums}
+.tco-axtitle{font-family:var(--font-cjk);font-size:13px;font-weight:600;fill:var(--ink-55)}
+.tco-area{fill:var(--vermillion);opacity:.10}
+.tco-line{fill:none;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.tco-line.trad{stroke:var(--navy)}
+.tco-line.ut{stroke:var(--vermillion)}
+@keyframes tcoDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.tco.play .tco-line{stroke-dasharray:1;animation:tcoDraw 1.7s cubic-bezier(.4,0,.2,1) forwards}
+.tco-endlab{font-family:var(--font);font-weight:700;font-size:15px;font-variant-numeric:tabular-nums}
+.tco-endlab .u{font-family:var(--font-cjk);font-weight:500;font-size:11px}
+.tco-endlab.trad{fill:var(--navy)}
+.tco-endlab.ut{fill:var(--vermillion-deep)}
+.tco-cross{opacity:1}
+.tco-clab{font-family:var(--font-cjk);font-weight:700;font-size:14px;fill:var(--vermillion-deep)}
+.tco-clab.sub{font-weight:500;font-size:12px;fill:var(--ink-55)}
+.tco-dot{transform-box:fill-box;transform-origin:center}
+.tco.play .tco-dot{animation:tcoPulse 2.4s ease-in-out 1.6s infinite}
+@keyframes tcoPulse{0%,100%{filter:drop-shadow(0 0 0 rgba(214,69,24,0))}50%{filter:drop-shadow(0 0 6px rgba(214,69,24,.55))}}
+.tco-foot{margin-top:18px}
+.tco-note{font-family:var(--font-cjk);font-size:15px;color:var(--ink-70);line-height:1.6}
+.tco-note strong{color:var(--vermillion-deep)}
+@media (prefers-reduced-motion:reduce){.tco.play .tco-line{animation:none}.tco.play .tco-dot{animation:none}}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2vw,26px)}
+.gcard{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--hairline)}
+.gcard .gimg{width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--paper-2);display:grid;place-items:center}
+.gcard .gimg img{width:100%;height:100%;object-fit:cover}
+.gcard .gmeta{padding:15px 17px;display:flex;flex-direction:column;gap:3px;border-top:1px solid var(--hairline)}
+.gcard .gt{font-family:var(--font-cjk);font-weight:700;font-size:var(--t-body);color:var(--ink)}
+.gcard .ge{font-family:var(--font);font-weight:500;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-40)}
+
+/* ===== use-case image feature block (Danelec-style) ===== */
+.uc-feature{position:relative;display:block;overflow:hidden;aspect-ratio:4/5;text-decoration:none;background:var(--ink)}
+.uc-feature img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .42s cubic-bezier(.2,.6,.2,1)}
+.uc-feature:hover img{transform:scale(1.03)}
+.uc-scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,22,18,.78) 0%,rgba(26,22,18,.34) 40%,rgba(26,22,18,0) 66%)}
+.uc-body{position:absolute;left:0;right:0;bottom:0;padding:clamp(22px,2.4vw,36px);display:flex;flex-direction:column;gap:11px;color:#fff}
+.uc-eyebrow{font-family:var(--font);font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--vermillion-bright)}
+.uc-h{font-family:var(--font-cjk);font-weight:700;font-size:clamp(22px,2vw,30px);line-height:1.2;color:#fff;letter-spacing:.01em}
+.uc-h .en{display:block;font-family:var(--font);font-weight:500;font-size:.5em;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.66);margin-top:6px}
+.uc-divider{height:2px;width:34px;background:rgba(255,255,255,.4);transition:width .42s cubic-bezier(.2,.6,.2,1),background .22s}
+.uc-feature:hover .uc-divider{width:72px;background:var(--vermillion)}
+.uc-arrow{position:absolute;top:clamp(20px,2.2vw,30px);right:clamp(20px,2.2vw,30px);width:50px;height:50px;border-radius:50%;border:1.5px solid rgba(255,255,255,.55);display:grid;place-items:center;color:#fff;transition:background .22s,border-color .22s,transform .22s}
+.uc-feature:hover .uc-arrow{background:var(--vermillion);border-color:var(--vermillion);transform:translateX(2px)}
+.uc-arrow svg{width:21px;height:21px}
+
+/* ===== product-list index (Danelec-style) ===== */
+.idx{display:flex;flex-direction:column;gap:clamp(18px,2vw,26px)}
+.idx-cap{font-family:var(--font);font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-40)}
+.idx-list{display:flex;flex-direction:column}
+.idx-item{display:flex;align-items:center;gap:16px;padding:clamp(15px,1.7vw,21px) 0;border-top:1px solid var(--hairline);text-decoration:none;transition:padding-left .22s cubic-bezier(.2,.6,.2,1)}
+.idx-item:last-child{border-bottom:1px solid var(--hairline)}
+.idx-item:hover{padding-left:12px}
+.idx-tx{display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
+.idx-t{font-family:var(--font-cjk);font-weight:700;font-size:var(--t-h3);color:var(--ink);line-height:1.2;transition:color .22s}
+.idx-item:hover .idx-t{color:var(--vermillion-deep)}
+.idx-d{font-family:var(--font);font-weight:500;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-55)}
+.idx-arrow{flex:0 0 auto;width:36px;height:36px;border-radius:50%;border:1px solid var(--hairline);display:grid;place-items:center;color:var(--ink-40);transition:background .22s,border-color .22s,color .22s,transform .22s}
+.idx-item:hover .idx-arrow{background:var(--vermillion);border-color:var(--vermillion);color:#fff;transform:translateX(3px)}
+.idx-arrow svg{width:17px;height:17px}
+@media (max-width:980px){.uc-feature{aspect-ratio:16/10}}
+
+/* ===== image zoom / lightbox ===== */
+.zoomable{position:relative}
+.zoom-btn{position:absolute;top:10px;right:10px;z-index:6;width:34px;height:34px;border:0;border-radius:6px;background:rgba(244,242,238,.92);color:var(--ink-70);display:grid;place-items:center;cursor:zoom-in;opacity:0;transform:translateY(-3px);transition:opacity .2s ease,transform .2s ease,background .18s,color .18s;box-shadow:0 2px 10px rgba(22,32,46,.16);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.zoomable:hover .zoom-btn,.zoom-btn:focus-visible{opacity:1;transform:translateY(0)}
+.zoom-btn:hover{background:#fff;color:var(--vermillion)}
+.zoom-btn svg{width:18px;height:18px}
+#lightbox{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:clamp(24px,5vw,72px);background:rgba(22,32,46,.5);-webkit-backdrop-filter:blur(10px) saturate(1.05);backdrop-filter:blur(10px) saturate(1.05)}
+#lightbox.open{display:flex;animation:lbIn .22s ease}
+@keyframes lbIn{from{opacity:0}to{opacity:1}}
+#lightbox .lb-img{max-width:min(1100px,92vw);max-height:86vh;width:auto;height:auto;object-fit:contain;background:#fff;border-radius:6px;box-shadow:0 40px 120px rgba(0,0,0,.45);animation:lbZoom .26s cubic-bezier(.2,.7,.3,1)}
+@keyframes lbZoom{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+#lightbox .lb-cap{position:fixed;left:0;right:0;bottom:max(18px,4vh);text-align:center;font-family:var(--font-cjk);font-size:14px;color:rgba(255,255,255,.82);padding:0 24px;pointer-events:none}
+#lbClose{position:fixed;top:clamp(16px,2.4vw,28px);right:clamp(16px,2.4vw,28px);z-index:210;width:46px;height:46px;border:0;border-radius:8px;background:rgba(255,255,255,.14);color:#fff;display:grid;place-items:center;cursor:pointer;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:background .18s}
+#lbClose:hover{background:rgba(255,255,255,.3)}
+#lbClose svg{width:24px;height:24px}
+@media (prefers-reduced-motion:reduce){#lightbox.open,#lightbox .lb-img{animation:none}}
+
+/* ===================== HERO (cover) ===================== */
+#sec-00{position:relative;padding:0;border-bottom:1px solid var(--hairline);overflow:hidden}
+.hero-grad{position:absolute;inset:0;z-index:0;background:
+  radial-gradient(120% 90% at 4% -6%,#EF5F35 0%,rgba(239,95,53,0) 48%),
+  radial-gradient(80% 70% at 98% 6%,#F7A64F 0%,rgba(247,166,79,0) 44%),
+  radial-gradient(95% 100% at 84% 110%,#F6C9AE 0%,rgba(246,201,174,0) 54%),
+  linear-gradient(142deg,#FBE4D6 0%,#FFFFFF 56%)}
+.hero-grain{position:absolute;inset:0;z-index:1;opacity:.5;mix-blend-mode:soft-light;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px 180px}
+.hero-inner{position:relative;z-index:2;padding:clamp(56px,7vw,118px) var(--content-pad);display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,4.5vw,76px);align-items:center;max-width:1280px;margin:0 auto}
+.hero-inner.solo{grid-template-columns:1fr}
+.hero-inner.solo .col{max-width:min(720px,90%)}
+.hero-logo-bg{position:absolute;z-index:1;right:clamp(-60px,-3vw,-20px);top:50%;transform:translateY(-50%);width:min(58%,760px);opacity:.09;pointer-events:none;user-select:none}
+.hero-logo-bg img{width:100%;height:auto;display:block}
+.hero-eyebrow{font-family:var(--font);font-weight:600;font-size:var(--t-cap);letter-spacing:.2em;text-transform:uppercase;color:var(--vermillion-deep);margin-bottom:20px}
+.hero-title{font-family:var(--font);font-weight:600;font-size:var(--t-hero);line-height:1.02;letter-spacing:-.015em;color:var(--ink)}
+.hero-subc{font-family:var(--font-cjk);font-weight:700;font-size:var(--t-h2);line-height:1.3;color:var(--ink);margin-top:16px}
+.hero-lead{font-family:var(--font-cjk);font-weight:400;font-size:var(--t-lead);line-height:var(--lh-normal);color:var(--ink-70);max-width:30em;margin-top:18px}
+.hero-lead .en{display:block;font-family:var(--font);font-weight:500;font-size:.76em;letter-spacing:.06em;color:var(--vermillion-deep);margin-top:8px}
+.hero-stats{display:flex;gap:clamp(22px,3vw,48px);margin-top:clamp(26px,3.2vw,42px)}
+.hero-stat{display:flex;flex-direction:column;gap:5px}
+.csn{font-family:var(--font);font-weight:600;font-size:clamp(28px,3.2vw,42px);line-height:1;color:var(--vermillion);font-variant-numeric:tabular-nums}
+.csn .csu{font-family:var(--font-cjk);font-weight:700;font-size:.4em;color:var(--ink-70);margin-left:.12em}
+.csl{font-family:var(--font-cjk);font-weight:500;font-size:var(--t-cap);color:var(--ink-55);letter-spacing:.02em}
+.hero-photo{margin:0;overflow:hidden;box-shadow:0 30px 72px rgba(22,32,46,.22);aspect-ratio:16/9}
+.hero-photo img{width:100%;height:100%;object-fit:cover}
+.scrollcue{display:flex;align-items:center;gap:9px;margin-top:clamp(22px,2.6vw,34px);font-family:var(--font);font-weight:500;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--vermillion-deep)}
+.scrollcue svg{width:15px;height:15px;animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+
+/* ===================== DARK BAND (future evolution) ===================== */
+#sec-10{position:relative;padding:0;border-bottom:1px solid var(--hairline);overflow:hidden;background:var(--navy-deep)}
+.dark-bg{position:absolute;inset:0;z-index:0}
+.dark-bg img{width:100%;height:100%;object-fit:cover;object-position:right center}
+.dark-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,rgba(20,42,69,.97) 0%,rgba(20,42,69,.9) 36%,rgba(20,42,69,.55) 64%,rgba(20,42,69,.12) 92%)}
+.dark-inner{position:relative;z-index:2;padding:var(--sec-y) var(--content-pad);max-width:1120px;margin:0 auto;color:#fff;max-width:min(720px,90%)}
+.dark-inner .eyebrow-cjk{color:var(--vermillion-bright)}
+.dark-inner .h1{color:#fff}
+.dark-inner .h1 .en{color:rgba(255,255,255,.5)}
+.dark-inner .eyebrow{color:var(--vermillion-bright)}
+.dark-inner .bullet{color:rgba(255,255,255,.92)}
+.dark-inner .rule{background:rgba(255,255,255,.2)}
+
+/* footer */
+.pagefoot{padding:clamp(34px,4vw,56px) var(--content-pad);background:var(--navy-deep);color:rgba(255,255,255,.7)}
+.pagefoot .wrap{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
+.pagefoot img{height:26px;filter:brightness(0) invert(1);opacity:.92}
+.pagefoot .meta{font-family:var(--font-cjk);font-size:13px;line-height:1.6}
+.pagefoot .meta .who{color:#fff;font-weight:700}
+.pagefoot .back{font-family:var(--font);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--vermillion-bright);text-decoration:none}
+.pagefoot .back:hover{color:#fff}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important}
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width:980px){
+  .split.s5050,.split.s6040,.split.s4060{grid-template-columns:1fr}
+  .grid4{grid-template-columns:repeat(2,1fr)}
+  .hero-inner{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  :root{--sidebar-w:0px}
+  main{margin-left:0}
+  body.sb-collapsed main{margin-left:0}
+  #sidebar{top:0;left:0;height:100vh;width:min(82vw,320px);border:0;border-right:1px solid var(--hairline);border-radius:0;box-shadow:0 0 60px rgba(22,32,46,.3);transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1)}
+  body.sb-collapsed #sidebar{width:min(82vw,320px)}
+  #sidebar.open{transform:translateX(0)}
+  .sb-collapse{display:none}
+  #sbToggle{display:flex;position:fixed;top:14px;left:14px;z-index:85;width:46px;height:46px;border:1px solid var(--hairline);background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-radius:4px;align-items:center;justify-content:center;cursor:pointer}
+  #sbToggle svg{width:22px;height:22px;stroke:var(--ink)}
+  #sbScrim{display:none;position:fixed;inset:0;background:rgba(22,32,46,.4);z-index:79}
+  #sbScrim.show{display:block}
+  .grid3,.gallery{grid-template-columns:1fr}
+  .grid4,.grid2{grid-template-columns:1fr}
+  .crow{grid-template-columns:1.3fr 1fr 1fr;gap:10px}
+  .crow .k,.crow .v{font-size:14px}
+}
+</style>
+</head>
+<body class="sb-collapsed">
+
+<div id="progress"></div>
+
+<button id="sbToggle" type="button" aria-label="開啟章節選單">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+</button>
+<div id="sbScrim"></div>
+
+<!-- ===================== SIDEBAR ===================== -->
+<aside id="sidebar">
+  <div class="sb-head">
+    <button class="sb-collapse" id="sbCollapse" type="button" aria-label="縮小或展開大綱">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <img class="sb-logo" src="images/hcdesign-logo.png" alt="HuiCiang Design and Build">
+    <div class="sb-eyebrow">Commercial Restroom System · 2026</div>
+    <div class="sb-title">UT Unit Toilet</div>
+    <div class="sb-sub">整體盥洗設備系統導入方案</div>
+  </div>
+  <div class="sb-tools">
+    <button class="sb-reorder" id="sbReorder" type="button" aria-pressed="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+      <span class="lbl">編輯順序</span>
+    </button>
+  </div>
+  <nav class="sb-nav" id="sbNav" aria-label="章節大綱">
+    <a class="sb-link" href="#sec-00"><span class="sb-no">00</span><span class="sb-tx"><span class="sb-cjk">方案概覽</span><span class="sb-en">Overview</span></span></a>
+    <a class="sb-link" href="#sec-01"><span class="sb-no">01</span><span class="sb-tx"><span class="sb-cjk">為何選擇 UT</span><span class="sb-en">Why UT</span></span></a>
+    <a class="sb-link" href="#sec-02"><span class="sb-no">02</span><span class="sb-tx"><span class="sb-cjk">系統核心價值</span><span class="sb-en">Core Value</span></span></a>
+    <a class="sb-link" href="#sec-03"><span class="sb-no">03</span><span class="sb-tx"><span class="sb-cjk">UB → UT 演進</span><span class="sb-en">Origin & Evolution</span></span></a>
+    <a class="sb-link" href="#sec-04"><span class="sb-no">04</span><span class="sb-tx"><span class="sb-cjk">主要技術特點</span><span class="sb-en">Key Features</span></span></a>
+    <a class="sb-link" href="#sec-05"><span class="sb-no">05</span><span class="sb-tx"><span class="sb-cjk">核心構造解析</span><span class="sb-en">Technical Anatomy</span></span></a>
+    <a class="sb-link" href="#sec-06"><span class="sb-no">06</span><span class="sb-tx"><span class="sb-cjk">安裝三大優勢</span><span class="sb-en">Installation Advantages</span></span></a>
+    <a class="sb-link" href="#sec-08"><span class="sb-no">08</span><span class="sb-tx"><span class="sb-cjk">應用案例</span><span class="sb-en">Application Cases</span></span></a>
+    <a class="sb-link" href="#sec-09"><span class="sb-no">09</span><span class="sb-tx"><span class="sb-cjk">生命週期比較</span><span class="sb-en">Lifecycle Comparison</span></span></a>
+    <a class="sb-link" href="#sec-10"><span class="sb-no">10</span><span class="sb-tx"><span class="sb-cjk">演變方向</span><span class="sb-en">Future Evolution</span></span></a>
+    <a class="sb-link" href="#sec-11"><span class="sb-no">11</span><span class="sb-tx"><span class="sb-cjk">設備與扶手加固</span><span class="sb-en">Fixtures & Accessibility</span></span></a>
+    <a class="sb-link" href="#sec-12"><span class="sb-no">12</span><span class="sb-tx"><span class="sb-cjk">結論與下一步</span><span class="sb-en">Conclusion</span></span></a>
+  </nav>
+  <div class="sb-foot">
+    <span class="ln"><span class="who">David Tsai</span> · 惠強室內裝修</span>
+    <span class="ln">專案經理 · Project Manager</span>
+    <span class="ln mono">+886-2-2557-3003</span>
+  </div>
+</aside>
+
+<!-- ===================== MAIN ===================== -->
+<main>
+
+  <!-- 00 · OVERVIEW / HERO -->
+  <section class="sec" id="sec-00" data-screen-label="00 Overview">
+    <div class="hero-grad"></div>
+    <div class="hero-logo-bg"><img src="images/hcdesign-logo.png" alt=""></div>
+    <div class="hero-grain"></div>
+    <div class="hero-inner solo">
+      <div class="col">
+        <div class="hero-eyebrow">Commercial Restroom System · 導入提案 · 2026</div>
+        <h1 class="hero-title">UT Unit Toilet</h1>
+        <p class="hero-subc">整體盥洗設備系統導入方案</p>
+        <p class="hero-lead">模組化、高抗震、便於維修的友善公共衛廁<span class="en">Modular · Seismic-resilient · Maintenance-friendly</span></p>
+        <div class="hero-stats">
+          <div class="hero-stat"><span class="csn">31<span class="csu">年</span></span><span class="csl">商業空間施工經驗</span></div>
+          <div class="hero-stat"><span class="csn">1,600<span class="csu">+</span></span><span class="csl">完工商業案場</span></div>
+          <div class="hero-stat"><span class="csn">12<span class="csu">個月</span></span><span class="csl">交付後保固</span></div>
+        </div>
+        <div class="scrollcue">向下捲動瀏覽完整方案<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 · WHY UT -->
+  <section class="sec" id="sec-01" data-screen-label="01 Why UT" data-comment-anchor="4f5211bc01-section">
+    <div class="wrap">
+      <div class="chead">
+        <span class="eyebrow-cjk">傳統衛廁的維護困境 · Why UT</span>
+        <h2 class="h1">為何選擇 UT 系統？<span class="en">Why UT</span></h2>
+        <p class="lead" style="max-width:42em">泥作層疊、管線埋牆、防水靠人工、剛性管路怕地震——傳統衛廁的四大痛點，正在拖累業主的長期營運效率。</p>
+      </div>
+      <div class="grid4" style="margin-bottom:clamp(34px,4vw,56px)">
+        <div class="step"><span class="n">01 · Construction</span><span class="t">施工期長</span><span class="d">泥作、防水、磁磚多工序層疊，工期難以壓縮。</span></div>
+        <div class="step"><span class="n">02 · Maintenance</span><span class="t">維修困難</span><span class="d">管線埋牆，需破壞性開挖，影響營運品質。</span></div>
+        <div class="step"><span class="n">03 · Waterproof</span><span class="t">防水仰賴人工</span><span class="d">施作品質參差不齊，漏水糾紛頻繁發生。</span></div>
+        <div class="step"><span class="n">04 · Seismic</span><span class="t">抗震性偏弱</span><span class="d">剛性管路易受樓層位移損壞，地震風險高。</span></div>
+      </div>
+      <figure class="figure framed"><img src="images/image-1-v2.png" alt="傳統衛廁施工與長期水損問題示意"></figure>
+    </div>
+  </section>
+
+  <!-- 02 · CORE VALUE -->
+  <section class="sec alt" id="sec-02" data-screen-label="02 Core Value" data-comment-anchor="b16ab079fd-section">
+    <div class="wrap">
+      <div class="chead">
+        <span class="eyebrow-cjk">三大價值支柱 · Three Pillars</span>
+        <h2 class="h1">UT 系統核心價值<span class="en">Core Value</span></h2>
+      </div>
+      <div class="grid3" style="margin-bottom:clamp(34px,4vw,56px)">
+        <div class="pillar"><div class="n">01</div><div class="t">工廠預製<span class="sub">Factory Prefabrication</span></div><div class="d">模組於工廠完成組裝、測試與品管，品質高度穩定，可規模化複製。</div></div>
+        <div class="pillar"><div class="n">02</div><div class="t">乾式施工<span class="sub">Dry Installation</span></div><div class="d">現場組裝，無需濕作泥作。完工時間可控，施工環境整潔高效。</div></div>
+        <div class="pillar"><div class="n">03</div><div class="t">維修友善<span class="sub">Maintenance-friendly</span></div><div class="d">牆前明管設計，不敲牆即可檢修，大幅降低長期維護成本與糾紛。</div></div>
+      </div>
+      <figure class="figure framed"><img src="images/image-2.png" alt="UT 系統核心價值流程示意：工廠預製、運輸、現場安裝、完工"></figure>
+    </div>
+  </section>
+
+  <!-- 03 · ORIGIN UB → UT -->
+  <section class="sec" id="sec-03" data-screen-label="03 Origin UB to UT" data-comment-anchor="fe70bdca9d-section">
+    <div class="wrap">
+      <div class="chead">
+        <span class="eyebrow-cjk">核心由來 · UB → UT</span>
+        <h2 class="h1">從 UB 到 UT 的技術演進<span class="en">Origin & Evolution</span></h2>
+      </div>
+      <div class="grid2 top">
+        <div class="col" style="gap:14px">
+          <span class="eyebrow">UB · Unit Bathroom</span>
+          <h3 class="h3">整體衛浴</h3>
+          <hr class="rule-ink">
+          <div class="bullets" style="margin-top:4px">
+            <div class="bullet navy">「底盤 + 牆板 + 天花板」<strong>封閉箱體結構</strong></div>
+            <div class="bullet navy">衛浴設備一次到位</div>
+            <div class="bullet navy">源自日本，廣泛應用於飯店、集合住宅</div>
+          </div>
+          <figure class="figure framed" style="margin-top:18px"><img src="images/image-3-1.png" alt="UB 整體衛浴技術剖面示意"></figure>
+        </div>
+        <div class="col" style="gap:14px">
+          <span class="eyebrow">UT · Unit Toilet — 演進方向</span>
+          <h3 class="h3">整體盥洗設備</h3>
+          <hr class="rule-brand">
+          <div class="bullets" style="margin-top:4px">
+            <div class="bullet">聚焦 <strong>牆前配管</strong>（Wall-front Piping）整體解決方案</div>
+            <div class="bullet">不含全封閉地板，<strong>彈性更高</strong></div>
+            <div class="bullet">所有管道集中於預製 <strong>配管箱</strong> 內</div>
+          </div>
+          <figure class="figure framed" style="margin-top:18px"><img src="images/image-3-2.png" alt="UT 整體盥洗設備技術剖面示意"></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · KEY FEATURES -->
+  <section class="sec alt" id="sec-04" data-screen-label="04 Key Features" data-comment-anchor="8f7a43b609-section">
+    <div class="wrap">
+      <div class="chead">
+        <span class="eyebrow-cjk">三大技術特點 · Key Technical Features</span>
+        <h2 class="h1">主要技術特點<span class="en">Key Features</span></h2>
+      </div>
+      <div class="split s6040">
+        <div class="steps">
+          <div class="step"><span class="n">01 · Wall-front Piping</span><span class="t">牆前配管技術</span><span class="d">冷熱水管、排汙管隱藏於配管箱中，維修僅需拆下面板。</span></div>
+          <div class="step"><span class="n">02 · Same-floor Drainage</span><span class="t">同層排水</span><span class="d">管道不穿越樓板，從源頭杜絕樓下漏水糾紛。</span></div>
+          <div class="step"><span class="n">03 · Versatile</span><span class="t">適用性廣</span><span class="d">醫院、飯店、學校、社會住宅皆適用，抗震表現優異。</span></div>
+        </div>
+        <figure class="figure framed" data-comment-anchor="56f079c0ec-figure"><img src="images/wall-front-piping-cutaway.png" alt="牆前配管系統等角剖面圖：懸吊式馬桶、隱藏式水箱、冷熱水管與同層排水整合於牆前配管箱"></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · TECHNICAL ANATOMY -->
+  <section class="sec" id="sec-05" data-screen-label="05 Technical Anatomy" data-comment-anchor="e9aee54eea-section">
+    <div class="wrap">
+      <div class="chead">
+        <span class="eyebrow-cjk">UNIT BOX · 牆前單元模組</span>
+        <h2 class="h1">核心構造技術解析<span class="en">Technical Anatomy</span></h2>
+      </div>
+      <div class="split s4060">
+        <div class="col" style="gap:clamp(20px,2.4vw,30px)">
+          <div class="col" style="gap:7px"><span class="eyebrow">Integration</span><p class="body">整合 <strong>給水、排水、通氣</strong> 管線，結構一體化，工廠預製完成。</p></div>
+          <div class="col" style="gap:7px"><span class="eyebrow">Material</span><p class="body">採用 <strong>#304 不鏽鋼板</strong>，潮濕環境下長期耐用不生鏽。</p></div>
+          <div class="col" style="gap:7px"><span class="eyebrow">Service Design</span><p class="body"><strong>人造石上蓋板</strong> 美觀耐汙；<strong>可拆卸式修飾面板</strong> 可快速開啟檢修。</p></div>
+          <div class="callout navy">工廠預製 = 品質可控　·　現場安裝 = 效率翻倍<span class="cite">UNIT BOX 核心優勢</span></div>
+        </div>
+        <figure class="figure framed"><img src="images/image-5.png" alt="UNIT BOX 等角爆炸圖：不鏽鋼框架、給排水通氣管、人造石上蓋與可拆面板"></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · INSTALLATION ADVANTAGES -->
+  <section class="sec alt" id="sec-06" data-screen-label="06 Installation Advantages" data-comment-anchor="7d6206fc84-section">
+    <div class="wrap">
+      <div class="chead">
+        <span class="eyebrow-cjk">三大安裝優勢 · Three Advantages</span>
+        <h2 class="h1">安裝三大優勢<span class="en">Installation Advantages</span></h2>
+      </div>
+      <div class="grid3" style="gap:clamp(10px,1.1vw,18px);align-items:center">
+        <figure class="figure framed" style="display:grid;place-items:center;padding:0;border-style:none"><img src="images/image-6-1.png" alt="耐震靈活性：柔性結構管線吸收樓層位移，地震不怕" style="max-height:480px;width:100%;object-fit:contain"></figure>
+        <figure class="figure framed" style="display:grid;place-items:center;padding:0;border-style:none"><img src="images/image-6-2.png" alt="施工時間縮短 50%：現場乾式安裝壓縮整體工期" style="max-height:480px;width:100%;object-fit:contain"></figure>
+        <figure class="figure framed" style="display:grid;place-items:center;padding:0;border-style:none"><img src="images/image-6-3.png" alt="成本效益：單管抽換、維修範圍最小化，降低長期營運成本" style="max-height:480px;width:100%;object-fit:contain"></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · APPLICATION CASES -->
+  <section class="sec alt" id="sec-08" data-screen-label="08 Application Cases" data-comment-anchor="73cf0a7383-section">
+    <div class="wrap">
+      <div class="chead">
+        <span class="eyebrow-cjk">台灣社宅與公共場所實績</span>
+        <h2 class="h1">應用案例<span class="en">Application Cases</span></h2>
+      </div>
+      <div class="split s5050 top">
+        <a class="uc-feature" href="#sec-08" onclick="return false">
+          <img src="images/image-8.png" alt="完工後的整體盥洗設備公共衛廁實景">
+          <div class="uc-scrim"></div>
+          <div class="uc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="uc-body">
+            <span class="uc-eyebrow">In Service · 已導入實績</span>
+            <span class="uc-h">公共衛廁完工實景<span class="en">Unit Toilet · Delivered</span></span>
+            <div class="uc-divider"></div>
+          </div>
+        </a>
+        <div class="idx">
+          <p class="lead" style="margin:0">國家住都中心已積極導入 UB／UT 工法，代表案例遍佈全台。</p>
+          <div class="col" style="gap:14px">
+            <span class="idx-cap">代表案例 · Representative Cases</span>
+            <div class="idx-list">
+              <a class="idx-item" href="#sec-08" onclick="return false">
+                <span class="idx-tx"><span class="idx-t">南港機廠社宅</span><span class="idx-d">Nangang Depot Social Housing · Taipei</span></span>
+                <span class="idx-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </a>
+              <a class="idx-item" href="#sec-08" onclick="return false">
+                <span class="idx-tx"><span class="idx-t">延吉好室</span><span class="idx-d">Yanji Hao-Shi Residence</span></span>
+                <span class="idx-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </a>
+              <a class="idx-item" href="#sec-08" onclick="return false">
+                <span class="idx-tx"><span class="idx-t">橋北安居</span><span class="idx-d">Qiaobei An-Ju Housing</span></span>
+                <span class="idx-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </a>
+              <a class="idx-item" href="#sec-08" onclick="return false">
+                <span class="idx-tx"><span class="idx-t">政府機關・醫療院所・公共場所</span><span class="idx-d">Government · Healthcare · Public Venues</span></span>
+                <span class="idx-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </a>
+            </div>
+          </div>
+          <div class="callout navy">防疫 · 管理 · 永續<span class="cite">同層排水避免漏水噪音糾紛 · 提升防疫與清潔效率 · 符合 ESG 循環經濟指標</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 · LIFECYCLE COMPARISON -->
+  <section class="sec" id="sec-09" data-screen-label="09 Lifecycle Comparison" data-comment-anchor="f7f0a43ced-section">
+    <div class="wrap">
+      <div class="chead">
+        <span class="eyebrow-cjk">50 年生命週期比較 · Lifecycle TCO</span>
+        <h2 class="h1">UT vs 傳統衛浴<span class="en">Lifecycle Comparison</span></h2>
+      </div>
+      <div class="grid2 top" style="margin-bottom:clamp(30px,3.6vw,48px)">
+        <div class="compare">
+          <div class="crow head"><span>比較項目</span><span>傳統衛浴</span><span>UT 系統</span></div>
+          <div class="crow"><span class="k">初期建置成本</span><span class="v good">較低</span><span class="v warn">較高</span></div>
+          <div class="crow"><span class="k">施工期程</span><span class="v bad">長（多工序）</span><span class="v good">短（縮短 50%）</span></div>
+          <div class="crow"><span class="k">維修便利性</span><span class="v bad">需破壞牆面</span><span class="v good">拆面板即可</span></div>
+          <div class="crow"><span class="k">漏水糾紛風險</span><span class="v bad">高（穿樓板）</span><span class="v good">低（同層排水）</span></div>
+          <div class="crow"><span class="k">50 年總成本 TCO</span><span class="v bad">累計維修高</span><span class="v good">顯著較低</span></div>
+        </div>
+        <div class="callout">在需長期營運管理之建築中，採用 UT 系統雖初期投入較多，但能大幅減少後續漏水維修造成的鄰里糾紛與施工開銷。<span class="cite">結論 · Total Cost of Ownership</span></div>
+      </div>
+      <figure class="figure tco" id="tcoChart">
+        <div class="tco-top">
+          <div class="tco-legend">
+            <span class="tco-lg trad"><i></i>傳統衛浴 · Traditional</span>
+            <span class="tco-lg ut"><i></i>UT 系統 · Unit Toilet</span>
+          </div>
+          <span class="tco-ytitle">累計總持有成本 TCO（相對指數）</span>
+        </div>
+        <div class="tco-plot"></div>
+        <div class="tco-foot">
+          <p class="tco-note">初期 UT 系統投入較高，但約於 <strong>第 15 年</strong> 達成本交叉點；50 年累計後，傳統衛浴的總持有成本約為 UT 系統的 <strong>2 倍</strong>。<span style="color:var(--ink-40)">　數值為相對指數，非實際金額。</span></p>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 10 · FUTURE EVOLUTION (dark band) -->
+  <section class="sec" id="sec-10" data-screen-label="10 Future Evolution">
+    <div class="dark-bg"><img src="images/image-10-1.png" alt="智慧衛廁概念：用水監測、漏水預警、空氣品質與占用感測儀表板"></div>
+    <div class="dark-scrim" data-comment-anchor="82f12cac57-div" style="background-position: center center"></div>
+    <div class="dark-inner" style="width: 847px">
+      <span class="eyebrow-cjk">國際整合 × 智慧化趨勢</span>
+      <h2 class="h1" style="margin-top:14px">演變方向<span class="en">Future Evolution</span></h2>
+      <hr class="rule" style="margin:24px 0">
+      <div class="col" style="gap:26px">
+        <div class="col" style="gap:12px">
+          <span class="eyebrow">國際技術整合</span>
+          <div class="bullets">
+            <div class="bullet">與歐洲 <strong style="color:#fff">GEBERIT</strong> 牆內系統整合</div>
+            <div class="bullet">與日本 <strong style="color:#fff">TOTO／INAX</strong> 衛浴技術整合</div>
+          </div>
+        </div>
+        <div class="col" style="gap:12px">
+          <span class="eyebrow">設計與智慧化趨勢</span>
+          <div class="bullets">
+            <div class="bullet"><strong style="color:#fff">AIoT 智慧化</strong>：用水量監測、漏水預警</div>
+            <div class="bullet">模組 <strong style="color:#fff">可回收、可重組</strong> 之循環設計</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · FIXTURES & ACCESSIBILITY -->
+  <section class="sec alt" id="sec-11" data-screen-label="11 Fixtures and Accessibility">
+    <div class="wrap">
+      <div class="chead">
+        <span class="eyebrow-cjk">無障礙扶手加固 · Accessible Reinforcement</span>
+        <h2 class="h1">設備整合與扶手加固<span class="en">Fixtures & Accessibility</span></h2>
+      </div>
+      <div class="split s6040 top" style="margin-bottom:clamp(40px,5vw,72px)">
+        <figure class="figure framed" data-comment-anchor="fb3ffe683f-figure"><img src="images/urinal-reinforcement-v2.png" alt="無障礙小便斗、一般小便斗與殘障坐便立骨對照：扶手補強與靠背補強鋼板位置圖"></figure>
+        <div class="col" style="gap:clamp(20px,2.4vw,28px)">
+          <p class="lead">無障礙設備的扶手須承受使用者體重，UT 模組於工廠端即在立骨間預先植入 <strong>一體成形鋼板</strong> 補強，確保扶手鎖固點位的結構強度。</p>
+          <div class="steps">
+            <div class="step"><span class="n">Spec 01</span><span class="t">一體成形鋼板</span><span class="d">採整片成形補強板，無焊接斷點，受力均勻。</span></div>
+            <div class="step"><span class="n">Spec 02</span><span class="t"><span class="mono">2.0 mm</span> 厚 · 高 <span class="mono">30 cm</span></span><span class="d">補強板高度 30 公分，兩側寬度依立骨角料同寬。</span></div>
+            <div class="step"><span class="n">Spec 03</span><span class="t">工廠預先植入</span><span class="d">現場無需額外補強，安裝即可承載扶手荷重。</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="chead" style="margin-bottom:clamp(22px,2.6vw,34px)">
+        <span class="eyebrow">Fixture Range</span>
+        <h3 class="h2">各式衛浴設備範例</h3>
+      </div>
+      <div class="gallery">
+        <div class="gcard"><div class="gimg"><img src="images/image-12-5.jpg" alt="無障礙馬桶與不鏽鋼扶手"></div><div class="gmeta"><span class="gt">無障礙馬桶 · 扶手</span><span class="ge">Accessible WC + Grab Bars</span></div></div>
+        <div class="gcard"><div class="gimg"><img src="images/image-12-3.jpg" alt="壁掛式感應沖水小便斗"></div><div class="gmeta"><span class="gt">壁掛感應小便斗</span><span class="ge">Wall-hung Urinal</span></div></div>
+        <div class="gcard"><div class="gimg"><img src="images/image-12-4.jpg" alt="落地式低位小便斗"></div><div class="gmeta"><span class="gt">落地式小便斗</span><span class="ge">Floor-mounted Urinal</span></div></div>
+        <div class="gcard"><div class="gimg"><img src="images/image-12-6.jpg" alt="懸吊式馬桶與按壓沖水面板"></div><div class="gmeta"><span class="gt">懸吊式馬桶</span><span class="ge">Wall-hung WC</span></div></div>
+        <div class="gcard"><div class="gimg"><img src="images/image-12-7.jpg" alt="隱藏式水箱安裝框架"></div><div class="gmeta"><span class="gt">隱藏式水箱框架</span><span class="ge">Concealed Cistern Frame</span></div></div>
+        <div class="gcard"><div class="gimg"><img src="images/image-12-2.jpg" alt="人造石檯面與感應龍頭洗手台"></div><div class="gmeta"><span class="gt">檯面感應洗手台</span><span class="ge">Vanity + Sensor Faucet</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 · CONCLUSION -->
+  <section class="sec" id="sec-12" data-screen-label="12 Conclusion">
+    <div class="wrap">
+      <div class="chead">
+        <span class="eyebrow-cjk">三大長期效益 · Three Long-term Benefits</span>
+        <h2 class="h1">結論與下一步<span class="en">Conclusion & Next Steps</span></h2>
+      </div>
+      <div class="split s6040 top">
+        <div class="col" style="gap:clamp(20px,2.4vw,30px)">
+          <div class="callout">UT 系統不僅是模組化產品，更是 <strong>現代化大樓的最佳營運工具</strong>。透過「標準化施工」與「友善維修設計」，為業主與使用者打造高品質、無漏水顧慮的公共環境。</div>
+          <div class="steps">
+            <div class="step"><span class="n">Benefit 01</span><span class="t">標準化施工</span><span class="d">品質可控、工期可預期，交付風險降至最低。</span></div>
+            <div class="step"><span class="n">Benefit 02</span><span class="t">友善維修設計</span><span class="d">降低營運後期維護成本，提升業主長期效益。</span></div>
+            <div class="step"><span class="n">Benefit 03</span><span class="t">零漏水顧慮</span><span class="d">守護業主與使用者體驗，消除鄰里糾紛根源。</span></div>
+          </div>
+        </div>
+        <figure class="figure framed" style="padding: 0px"><img src="images/image-11-1.png" alt="三大長期效益與下一步行動示意"></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="pagefoot">
+    <div class="wrap">
+      <img src="images/hcdesign-logo.png" alt="HuiCiang Design and Build">
+      <div class="meta">
+        <span class="who">惠強室內裝修股份有限公司</span> · UT Unit Toilet 整體盥洗設備系統導入方案<br>
+        David Tsai · 專案經理 · <span class="mono">+886-2-2557-3003</span> · 2026
+      </div>
+      <a class="back" href="#sec-00">回到頂部 ↑</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  var nav=document.getElementById('sbNav');
+  var links=Array.prototype.slice.call(nav.querySelectorAll('.sb-link'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  var progress=document.getElementById('progress');
+  var sidebar=document.getElementById('sidebar');
+  var scrim=document.getElementById('sbScrim');
+  var toggle=document.getElementById('sbToggle');
+  var collapseBtn=document.getElementById('sbCollapse');
+
+  // collapse / expand (desktop) — title tooltips for collapsed rail
+  links.forEach(function(a){
+    var c=a.querySelector('.sb-cjk');
+    if(c) a.setAttribute('title', a.querySelector('.sb-no').textContent+' · '+c.textContent);
+  });
+  var CKEY='ut-web-sb-collapsed';
+  try{ if(localStorage.getItem(CKEY)==='0') document.body.classList.remove('sb-collapsed'); }catch(e){}
+  collapseBtn.addEventListener('click',function(){
+    var c=document.body.classList.toggle('sb-collapsed');
+    collapseBtn.setAttribute('aria-label', c?'展開大綱':'縮小大綱');
+    try{ localStorage.setItem(CKEY, c?'1':'0'); }catch(e){}
+  });
+
+  // scroll-spy
+  var spy=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var id=e.target.id;
+        links.forEach(function(a){
+          a.classList.toggle('active', a.getAttribute('href')==='#'+id);
+        });
+        // keep active item visible in the nav
+        var act=nav.querySelector('.sb-link.active');
+        if(act){
+          var r=act.getBoundingClientRect(), nr=nav.getBoundingClientRect();
+          if(r.top<nr.top+8) nav.scrollTop-=(nr.top+8-r.top);
+          else if(r.bottom>nr.bottom-8) nav.scrollTop+=(r.bottom-(nr.bottom-8));
+        }
+      }
+    });
+  },{rootMargin:'-45% 0px -50% 0px',threshold:0});
+  secs.forEach(function(s){ if(s) spy.observe(s); });
+
+  // reading progress
+  function onScroll(){
+    var h=document.documentElement;
+    var max=h.scrollHeight-h.clientHeight;
+    progress.style.width=(max>0?(h.scrollTop/max*100):0)+'%';
+  }
+  window.addEventListener('scroll',function(){ requestAnimationFrame(onScroll); },{passive:true});
+  onScroll();
+
+  // mobile sidebar
+  function openSb(o){ sidebar.classList.toggle('open',o); scrim.classList.toggle('show',o); }
+  toggle.addEventListener('click',function(){ openSb(!sidebar.classList.contains('open')); });
+  scrim.addEventListener('click',function(){ openSb(false); });
+  links.forEach(function(a){ a.addEventListener('click',function(){ if(window.innerWidth<=760) openSb(false); }); });
+
+  // ===== reorder chapters (drag & drop) =====
+  var reorderBtn=document.getElementById('sbReorder');
+  var mainEl=document.querySelector('main');
+  var pagefoot=mainEl.querySelector('.pagefoot');
+  var OKEY='ut-web-order';
+  var reordering=false;
+
+  links.forEach(function(l){
+    l.setAttribute('draggable','false');
+    if(l.getAttribute('href')==='#sec-00') return;
+    var grip=document.createElement('span'); grip.className='sb-grip';
+    grip.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 5h.01M9 12h.01M9 19h.01M15 5h.01M15 12h.01M15 19h.01"/></svg>';
+    l.appendChild(grip);
+  });
+
+  function getAfter(y){
+    var els=Array.prototype.slice.call(nav.querySelectorAll('.sb-link:not(.dragging)')).filter(function(l){return l.getAttribute('href')!=='#sec-00';});
+    var closest={offset:-Infinity,el:null};
+    els.forEach(function(child){
+      var box=child.getBoundingClientRect();
+      var offset=y-box.top-box.height/2;
+      if(offset<0 && offset>closest.offset) closest={offset:offset,el:child};
+    });
+    return closest.el;
+  }
+  function syncSections(){
+    Array.prototype.slice.call(nav.querySelectorAll('.sb-link')).forEach(function(l){
+      var s=document.getElementById(l.getAttribute('href').slice(1));
+      if(s) mainEl.appendChild(s);
+    });
+    if(pagefoot) mainEl.appendChild(pagefoot);
+  }
+  function renumber(){
+    Array.prototype.slice.call(nav.querySelectorAll('.sb-link')).forEach(function(l,i){
+      var num=String(i).padStart(2,'0');
+      var no=l.querySelector('.sb-no'); if(no) no.textContent=num;
+      var cjk=l.querySelector('.sb-cjk'); if(cjk) l.setAttribute('title',num+' · '+cjk.textContent);
+      var sec=document.getElementById(l.getAttribute('href').slice(1));
+      if(sec && sec.getAttribute('data-screen-label')) sec.setAttribute('data-screen-label', sec.getAttribute('data-screen-label').replace(/^\d+/, num));
+    });
+  }
+  function saveOrder(){
+    try{ localStorage.setItem(OKEY, JSON.stringify(Array.prototype.slice.call(nav.querySelectorAll('.sb-link')).map(function(l){return l.getAttribute('href').slice(1);}))); }catch(e){}
+  }
+  function applySavedOrder(){
+    try{
+      var saved=JSON.parse(localStorage.getItem(OKEY)||'null');
+      if(!saved||!saved.length) return;
+      saved.forEach(function(id){ var l=nav.querySelector('.sb-link[href="#'+id+'"]'); if(l) nav.appendChild(l); });
+      syncSections(); renumber();
+    }catch(e){}
+  }
+
+  reorderBtn.addEventListener('click',function(){
+    reordering=!reordering;
+    nav.classList.toggle('reordering',reordering);
+    reorderBtn.classList.toggle('active',reordering);
+    reorderBtn.setAttribute('aria-pressed',reordering?'true':'false');
+    reorderBtn.querySelector('.lbl').textContent=reordering?'完成排序':'編輯順序';
+    links.forEach(function(l){
+      if(l.getAttribute('href')==='#sec-00') return;
+      l.setAttribute('draggable', reordering?'true':'false');
+    });
+  });
+
+  nav.addEventListener('dragstart',function(e){
+    if(!reordering) return;
+    var l=e.target.closest('.sb-link'); if(!l) return;
+    if(l.getAttribute('href')==='#sec-00'){ e.preventDefault(); return; }
+    l.classList.add('dragging');
+    try{ e.dataTransfer.effectAllowed='move'; e.dataTransfer.setData('text/plain',''); }catch(_){}
+  });
+  nav.addEventListener('dragover',function(e){
+    if(!reordering) return;
+    var dragging=nav.querySelector('.dragging'); if(!dragging) return;
+    e.preventDefault();
+    var after=getAfter(e.clientY);
+    if(after==null) nav.appendChild(dragging); else nav.insertBefore(dragging,after);
+  });
+  nav.addEventListener('drop',function(e){ if(reordering) e.preventDefault(); });
+  nav.addEventListener('dragend',function(){
+    var d=nav.querySelector('.dragging'); if(d) d.classList.remove('dragging');
+    syncSections(); renumber(); saveOrder();
+  });
+  nav.addEventListener('click',function(e){ if(reordering) e.preventDefault(); },true);
+
+  applySavedOrder();
+})();
+</script>
+<script>
+/* ===== TCO animated line chart ===== */
+(function(){
+  var fig=document.getElementById('tcoChart');
+  if(!fig) return;
+  var host=fig.querySelector('.tco-plot');
+  var NS='http://www.w3.org/2000/svg';
+  var W=920,H=480,L=64,R=96,Tp=26,B=66,Vmax=130,Ymax=50;
+  function X(t){return L + t/Ymax*(W-L-R);}
+  function Y(v){return (H-B) - v/Vmax*(H-Tp-B);}
+  function T(t){return 10 + 1.7*t + 0.012*t*t;}      // 傳統：低初期、維修累積快
+  function U(t){return 30 + 0.55*t + 0.002*t*t;}     // UT：高初期、維護平緩
+  var cx=0; for(var t=0;t<=Ymax;t+=0.05){ if(T(t)>=U(t)){cx=t;break;} }
+  cx=Math.round(cx*10)/10;
+  function el(n,a,c){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(c)e.setAttribute('class',c);return e;}
+  function lineD(fn){var d='';for(var t=0;t<=Ymax;t++){d+=(t===0?'M':'L')+X(t).toFixed(1)+' '+Y(fn(t)).toFixed(1)+' ';}return d.trim();}
+
+  var svg=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'50 年累計總持有成本比較：傳統衛浴與 UT 系統約於第 '+Math.round(cx)+' 年成本交叉，其後 UT 累計成本顯著較低，第 50 年傳統衛浴約為 UT 的兩倍。'});
+
+  // gridlines + y ticks
+  [0,26,52,78,104,130].forEach(function(v){
+    svg.appendChild(el('line',{x1:L,y1:Y(v),x2:W-R,y2:Y(v)},'tco-grid'));
+    var tx=el('text',{x:L-12,y:Y(v)+4,'text-anchor':'end'},'tco-tick'); tx.textContent=v; svg.appendChild(tx);
+  });
+  // x ticks
+  [0,10,20,30,40,50].forEach(function(t){
+    var tx=el('text',{x:X(t),y:H-B+26,'text-anchor':'middle'},'tco-tick'); tx.textContent=t; svg.appendChild(tx);
+  });
+  // axes
+  svg.appendChild(el('line',{x1:L,y1:Y(0),x2:W-R,y2:Y(0)},'tco-axis'));
+  svg.appendChild(el('line',{x1:L,y1:Tp,x2:L,y2:Y(0)},'tco-axis'));
+  var xt=el('text',{x:(L+(W-R))/2,y:H-12,'text-anchor':'middle'},'tco-axtitle'); xt.textContent='營運年數（年）'; svg.appendChild(xt);
+
+  // savings area (region where UT cheaper, after crossover)
+  var pts=[X(cx).toFixed(1)+' '+Y(U(cx)).toFixed(1)];
+  for(var t=Math.ceil(cx);t<=Ymax;t++) pts.push(X(t).toFixed(1)+' '+Y(U(t)).toFixed(1));
+  for(var t=Ymax;t>=Math.ceil(cx);t--) pts.push(X(t).toFixed(1)+' '+Y(T(t)).toFixed(1));
+  pts.push(X(cx).toFixed(1)+' '+Y(T(cx)).toFixed(1));
+  var area=el('path',{d:'M'+pts.join(' L')+' Z'},'tco-area'); svg.appendChild(area);
+
+  // lines
+  var lT=el('path',{d:lineD(T),pathLength:'1'},'tco-line trad'); svg.appendChild(lT);
+  var lU=el('path',{d:lineD(U),pathLength:'1'},'tco-line ut');   svg.appendChild(lU);
+
+  // end labels (final values shown by default; counted up on play)
+  var endT=Math.round(T(Ymax)), endU=Math.round(U(Ymax));
+  var labT=el('text',{x:X(Ymax)+9,y:Y(T(Ymax))+5},'tco-endlab trad'); labT.textContent='≈ '+endT; svg.appendChild(labT);
+  var labU=el('text',{x:X(Ymax)+9,y:Y(U(Ymax))+5},'tco-endlab ut');   labU.textContent='≈ '+endU; svg.appendChild(labU);
+
+  // crossover group
+  var g=el('g',{},'tco-cross');
+  g.appendChild(el('line',{x1:X(cx),y1:Y(U(cx)),x2:X(cx),y2:Y(0),'stroke-dasharray':'4 5',stroke:'var(--vermillion)','stroke-width':'1.5',opacity:'.75'}));
+  g.appendChild(el('circle',{cx:X(cx),cy:Y(U(cx)),r:'7',fill:'#fff',stroke:'var(--vermillion)','stroke-width':'3'},'tco-dot'));
+  var cl1=el('text',{x:X(cx),y:Y(U(cx))-30,'text-anchor':'middle'},'tco-clab'); cl1.textContent='成本交叉點'; g.appendChild(cl1);
+  var cl2=el('text',{x:X(cx),y:Y(U(cx))-12,'text-anchor':'middle'},'tco-clab sub'); cl2.textContent='第 '+Math.round(cx)+' 年'; g.appendChild(cl2);
+  svg.appendChild(g);
+
+  host.appendChild(svg);
+
+  var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function countUp(node,to,dur,pre){
+    pre=pre||''; var s=performance.now();
+    (function f(n){var k=Math.min(1,(n-s)/dur);var e=1-Math.pow(1-k,3);node.textContent=pre+Math.round(to*e);if(k<1)requestAnimationFrame(f);})(performance.now());
+  }
+  var played=false;
+  function play(){
+    if(played) return; played=true;
+    if(reduce) return;                 // static chart is already fully visible
+    fig.classList.add('play');         // re-draws the curves via CSS
+    countUp(labT,endT,1700,'≈ ');
+    countUp(labU,endU,1700,'≈ ');
+  }
+  function maybePlay(){
+    var r=fig.getBoundingClientRect(), vh=window.innerHeight||document.documentElement.clientHeight;
+    if(r.top < vh*0.85 && r.bottom>40) play();
+  }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ play(); io.disconnect(); } });},{threshold:.2});
+    io.observe(fig);
+  }
+  window.addEventListener('scroll',maybePlay,{passive:true});
+  window.addEventListener('resize',maybePlay);
+  maybePlay();
+})();
+</script>
+<script>
+/* ===== image zoom lightbox ===== */
+(function(){
+  var imgs=document.querySelectorAll('.figure img, .gcard .gimg img, .hero-photo img');
+  if(!imgs.length) return;
+  var ZOOM='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>';
+  var lb=document.createElement('div'); lb.id='lightbox'; lb.setAttribute('role','dialog'); lb.setAttribute('aria-modal','true');
+  var lbImg=document.createElement('img'); lbImg.className='lb-img'; lbImg.alt='';
+  var lbCap=document.createElement('div'); lbCap.className='lb-cap';
+  var lbClose=document.createElement('button'); lbClose.id='lbClose'; lbClose.type='button'; lbClose.setAttribute('aria-label','關閉');
+  lbClose.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+  lb.appendChild(lbImg); lb.appendChild(lbCap); lb.appendChild(lbClose);
+  document.body.appendChild(lb);
+  var lastFocus=null;
+  function open(src,alt){ lbImg.src=src; lbImg.alt=alt||''; lbCap.textContent=alt||''; lb.classList.add('open'); document.body.style.overflow='hidden'; lbClose.focus(); }
+  function close(){ lb.classList.remove('open'); lbImg.removeAttribute('src'); document.body.style.overflow=''; if(lastFocus&&lastFocus.focus) lastFocus.focus(); }
+  lbClose.addEventListener('click',close);
+  lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && lb.classList.contains('open')) close(); });
+
+  imgs.forEach(function(img){
+    var c=img.parentElement; if(!c) return;
+    c.classList.add('zoomable');
+    var btn=document.createElement('button'); btn.type='button'; btn.className='zoom-btn'; btn.setAttribute('aria-label','放大檢視 '+(img.alt||''));
+    btn.innerHTML=ZOOM;
+    btn.addEventListener('click',function(e){ e.preventDefault(); e.stopPropagation(); lastFocus=btn; open(img.currentSrc||img.src, img.alt); });
+    c.appendChild(btn);
+    img.style.cursor='zoom-in';
+    img.addEventListener('click',function(){ lastFocus=img; open(img.currentSrc||img.src, img.alt); });
+  });
+})();
+</script>
+<template id="__bundler_thumbnail" data-bg-color="#FBE4D6">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#FBE4D6"/>
+    <rect x="0" y="0" width="150" height="800" fill="#ffffff"/>
+    <rect x="34" y="60" width="82" height="10" rx="2" fill="#D64518"/>
+    <rect x="34" y="140" width="82" height="8" rx="2" fill="#1E3A5F" opacity="0.5"/>
+    <rect x="34" y="180" width="64" height="8" rx="2" fill="#1E3A5F" opacity="0.3"/>
+    <rect x="34" y="220" width="72" height="8" rx="2" fill="#1E3A5F" opacity="0.3"/>
+    <text x="340" y="380" font-family="Poppins, sans-serif" font-size="120" font-weight="700" fill="#16202E">UT</text>
+    <text x="340" y="470" font-family="sans-serif" font-size="40" font-weight="500" fill="#D64518" letter-spacing="4">UNIT TOILET</text>
+    <circle cx="1010" cy="300" r="150" fill="#EE6A2E" opacity="0.22"/>
+  </svg>
+</template>
+</body>
+</html>
