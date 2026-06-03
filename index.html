@@ -168,6 +168,17 @@ strong{font-weight:700;color:var(--ink)}
 .figure.framed{background:transparent;border:0;padding:clamp(18px,2vw,32px)}
 .cap{margin-top:12px;font-family:var(--font);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-40)}
 
+/* advantage cards (image-top + content) */
+.adv-card{display:flex;flex-direction:column}
+.adv-card .adv-img{margin:0;overflow:hidden;background:transparent;height:500px}
+.adv-card .adv-img img{width:100%;height:100%;object-fit:contain;transition:transform .42s cubic-bezier(.2,.6,.2,1)}
+.adv-card:hover .adv-img img{transform:scale(1.02)}
+.adv-card .adv-body{display:flex;flex-direction:column;gap:11px;padding:clamp(18px,1.6vw,24px) 0 0}
+.adv-card .adv-num{font-family:var(--font);font-weight:700;font-size:clamp(15px,1.2vw,18px);letter-spacing:.1em;text-transform:uppercase;color:var(--vermillion)}
+.adv-card .adv-h{font-family:var(--font-cjk);font-weight:700;font-size:var(--t-h3);line-height:var(--lh-snug);color:var(--ink)}
+.adv-card .adv-h .en{display:block;margin-top:4px;font-family:var(--font);font-weight:500;font-size:.62em;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-40)}
+.adv-card .adv-d{font-family:var(--font-cjk);font-weight:400;font-size:var(--t-body);line-height:var(--lh-normal);color:var(--ink-70)}
+
 /* steps / cards */
 .steps{display:grid;gap:clamp(18px,2vw,28px)}
 .step{display:flex;flex-direction:column;gap:7px;padding-top:16px;border-top:1px solid var(--hairline)}
@@ -457,7 +468,7 @@ strong{font-weight:700;color:var(--ink)}
   </section>
 
   <!-- 01 · WHY UT -->
-  <section class="sec" id="sec-01" data-screen-label="01 Why UT" data-comment-anchor="4f5211bc01-section">
+  <section class="sec" id="sec-01" data-screen-label="01 Why UT">
     <div class="wrap">
       <div class="chead">
         <span class="eyebrow-cjk">傳統衛廁的維護困境 · Why UT</span>
@@ -475,7 +486,7 @@ strong{font-weight:700;color:var(--ink)}
   </section>
 
   <!-- 02 · CORE VALUE -->
-  <section class="sec alt" id="sec-02" data-screen-label="02 Core Value" data-comment-anchor="b16ab079fd-section">
+  <section class="sec alt" id="sec-02" data-screen-label="02 Core Value">
     <div class="wrap">
       <div class="chead">
         <span class="eyebrow-cjk">三大價值支柱 · Three Pillars</span>
@@ -491,7 +502,7 @@ strong{font-weight:700;color:var(--ink)}
   </section>
 
   <!-- 03 · ORIGIN UB → UT -->
-  <section class="sec" id="sec-03" data-screen-label="03 Origin UB to UT" data-comment-anchor="fe70bdca9d-section">
+  <section class="sec" id="sec-03" data-screen-label="03 Origin UB to UT">
     <div class="wrap">
       <div class="chead">
         <span class="eyebrow-cjk">核心由來 · UB → UT</span>
@@ -525,7 +536,7 @@ strong{font-weight:700;color:var(--ink)}
   </section>
 
   <!-- 04 · KEY FEATURES -->
-  <section class="sec alt" id="sec-04" data-screen-label="04 Key Features" data-comment-anchor="8f7a43b609-section">
+  <section class="sec alt" id="sec-04" data-screen-label="04 Key Features">
     <div class="wrap">
       <div class="chead">
         <span class="eyebrow-cjk">三大技術特點 · Key Technical Features</span>
@@ -537,47 +548,66 @@ strong{font-weight:700;color:var(--ink)}
           <div class="step"><span class="n">02 · Same-floor Drainage</span><span class="t">同層排水</span><span class="d">管道不穿越樓板，從源頭杜絕樓下漏水糾紛。</span></div>
           <div class="step"><span class="n">03 · Versatile</span><span class="t">適用性廣</span><span class="d">醫院、飯店、學校、社會住宅皆適用，抗震表現優異。</span></div>
         </div>
-        <figure class="figure framed" data-comment-anchor="56f079c0ec-figure"><img src="images/wall-front-piping-cutaway.png" alt="牆前配管系統等角剖面圖：懸吊式馬桶、隱藏式水箱、冷熱水管與同層排水整合於牆前配管箱"></figure>
+        <figure class="figure framed"><img src="images/wall-front-piping-cutaway.png" alt="牆前配管系統等角剖面圖：懸吊式馬桶、隱藏式水箱、冷熱水管與同層排水整合於牆前配管箱"></figure>
       </div>
     </div>
   </section>
 
   <!-- 05 · TECHNICAL ANATOMY -->
-  <section class="sec" id="sec-05" data-screen-label="05 Technical Anatomy" data-comment-anchor="e9aee54eea-section">
+  <section class="sec" id="sec-05" data-screen-label="05 Technical Anatomy">
     <div class="wrap">
       <div class="chead">
         <span class="eyebrow-cjk">UNIT BOX · 牆前單元模組</span>
         <h2 class="h1">核心構造技術解析<span class="en">Technical Anatomy</span></h2>
       </div>
-      <div class="split s4060">
-        <div class="col" style="gap:clamp(20px,2.4vw,30px)">
-          <div class="col" style="gap:7px"><span class="eyebrow">Integration</span><p class="body">整合 <strong>給水、排水、通氣</strong> 管線，結構一體化，工廠預製完成。</p></div>
-          <div class="col" style="gap:7px"><span class="eyebrow">Material</span><p class="body">採用 <strong>#304 不鏽鋼板</strong>，潮濕環境下長期耐用不生鏽。</p></div>
-          <div class="col" style="gap:7px"><span class="eyebrow">Service Design</span><p class="body"><strong>人造石上蓋板</strong> 美觀耐汙；<strong>可拆卸式修飾面板</strong> 可快速開啟檢修。</p></div>
-          <div class="callout navy">工廠預製 = 品質可控　·　現場安裝 = 效率翻倍<span class="cite">UNIT BOX 核心優勢</span></div>
-        </div>
-        <figure class="figure framed"><img src="images/image-5.png" alt="UNIT BOX 等角爆炸圖：不鏽鋼框架、給排水通氣管、人造石上蓋與可拆面板"></figure>
+      <div class="grid3" style="margin-bottom:clamp(24px,3vw,44px);align-items:start">
+        <div class="col" style="gap:7px"><span class="eyebrow">Integration</span><p class="body">整合 <strong>給水、排水、通氣</strong> 管線，結構一體化，工廠預製完成。</p></div>
+        <div class="col" style="gap:7px"><span class="eyebrow">Material</span><p class="body">採用 <strong>#304 不鏽鋼板</strong>，潮濕環境下長期耐用不生鏽。</p></div>
+        <div class="col" style="gap:7px"><span class="eyebrow">Service Design</span><p class="body"><strong>人造石上蓋板</strong> 美觀耐汙；<strong>可拆卸式修飾面板</strong> 可快速開啟檢修。</p></div>
       </div>
+      <figure class="figure framed" style="margin-bottom:clamp(20px,2.4vw,32px)"><img src="images/unit-box-exploded.png" alt="UNIT BOX 牆前單元模組爆炸結構圖：修飾面板、可拆維修面板、配管箱、支撐框架、冷熱水管、排水管、固定連接件、牆體背板與同層排水樓板剖面"></figure>
+      <div class="callout navy">工廠預製 = 品質可控　·　現場安裝 = 效率翻倍<span class="cite">UNIT BOX 核心優勢</span></div>
     </div>
   </section>
 
   <!-- 06 · INSTALLATION ADVANTAGES -->
-  <section class="sec alt" id="sec-06" data-screen-label="06 Installation Advantages" data-comment-anchor="7d6206fc84-section">
+  <section class="sec alt" id="sec-06" data-screen-label="06 Installation Advantages">
     <div class="wrap">
       <div class="chead">
         <span class="eyebrow-cjk">三大安裝優勢 · Three Advantages</span>
         <h2 class="h1">安裝三大優勢<span class="en">Installation Advantages</span></h2>
       </div>
-      <div class="grid3" style="gap:clamp(10px,1.1vw,18px);align-items:center">
-        <figure class="figure framed" style="display:grid;place-items:center;padding:0;border-style:none"><img src="images/image-6-1.png" alt="耐震靈活性：柔性結構管線吸收樓層位移，地震不怕" style="max-height:480px;width:100%;object-fit:contain"></figure>
-        <figure class="figure framed" style="display:grid;place-items:center;padding:0;border-style:none"><img src="images/image-6-2.png" alt="施工時間縮短 50%：現場乾式安裝壓縮整體工期" style="max-height:480px;width:100%;object-fit:contain"></figure>
-        <figure class="figure framed" style="display:grid;place-items:center;padding:0;border-style:none"><img src="images/image-6-3.png" alt="成本效益：單管抽換、維修範圍最小化，降低長期營運成本" style="max-height:480px;width:100%;object-fit:contain"></figure>
+      <div class="grid3" style="gap:clamp(16px,1.8vw,28px);align-items:stretch">
+        <article class="adv-card">
+          <figure class="adv-img"><img src="images/image-6-1.png" alt="耐震靈活性：柔性結構管線吸收樓層位移，地震不怕"></figure>
+          <div class="adv-body">
+            <span class="adv-num">1 Advantage</span>
+            <h3 class="adv-h">抗震靈活性<span class="en">Seismic Flexibility</span></h3>
+            <p class="adv-d">柔性結構管線設計，有效克服高樓層間位移帶來的管路損壞風險。</p>
+          </div>
+        </article>
+        <article class="adv-card">
+          <figure class="adv-img"><img src="images/image-6-2.png" alt="施工時間短：現場乾式安裝壓縮整體工期"></figure>
+          <div class="adv-body">
+            <span class="adv-num">2 Advantage</span>
+            <h3 class="adv-h">施工時間短<span class="en">Reduced Construction Time</span></h3>
+            <p class="adv-d">相較於傳統泥作，現場安裝可<strong>縮短 50%</strong>，顯著縮短整體專案期程。</p>
+          </div>
+        </article>
+        <article class="adv-card">
+          <figure class="adv-img"><img src="images/image-6-3.png" alt="維護成本低：單管抽換、維修範圍最小化，降低長期營運成本"></figure>
+          <div class="adv-body">
+            <span class="adv-num">3 Advantage</span>
+            <h3 class="adv-h">維護成本低<span class="en">Lower Maintenance Cost</span></h3>
+            <p class="adv-d">單管抽換設計，維修範圍縮小至箱體內部，大幅降低營運後期維護成本。</p>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- 08 · APPLICATION CASES -->
-  <section class="sec alt" id="sec-08" data-screen-label="08 Application Cases" data-comment-anchor="73cf0a7383-section">
+  <section class="sec alt" id="sec-08" data-screen-label="08 Application Cases">
     <div class="wrap">
       <div class="chead">
         <span class="eyebrow-cjk">台灣社宅與公共場所實績</span>
@@ -624,7 +654,7 @@ strong{font-weight:700;color:var(--ink)}
   </section>
 
   <!-- 09 · LIFECYCLE COMPARISON -->
-  <section class="sec" id="sec-09" data-screen-label="09 Lifecycle Comparison" data-comment-anchor="f7f0a43ced-section">
+  <section class="sec" id="sec-09" data-screen-label="09 Lifecycle Comparison">
     <div class="wrap">
       <div class="chead">
         <span class="eyebrow-cjk">50 年生命週期比較 · Lifecycle TCO</span>
@@ -660,7 +690,7 @@ strong{font-weight:700;color:var(--ink)}
   <!-- 10 · FUTURE EVOLUTION (dark band) -->
   <section class="sec" id="sec-10" data-screen-label="10 Future Evolution">
     <div class="dark-bg"><img src="images/image-10-1.png" alt="智慧衛廁概念：用水監測、漏水預警、空氣品質與占用感測儀表板"></div>
-    <div class="dark-scrim" data-comment-anchor="82f12cac57-div" style="background-position: center center"></div>
+    <div class="dark-scrim" style="background-position: center center"></div>
     <div class="dark-inner" style="width: 847px">
       <span class="eyebrow-cjk">國際整合 × 智慧化趨勢</span>
       <h2 class="h1" style="margin-top:14px">演變方向<span class="en">Future Evolution</span></h2>
@@ -692,7 +722,7 @@ strong{font-weight:700;color:var(--ink)}
         <h2 class="h1">設備整合與扶手加固<span class="en">Fixtures & Accessibility</span></h2>
       </div>
       <div class="split s6040 top" style="margin-bottom:clamp(40px,5vw,72px)">
-        <figure class="figure framed" data-comment-anchor="fb3ffe683f-figure"><img src="images/urinal-reinforcement-v2.png" alt="無障礙小便斗、一般小便斗與殘障坐便立骨對照：扶手補強與靠背補強鋼板位置圖"></figure>
+        <figure class="figure framed"><img src="images/urinal-reinforcement-v2.png" alt="無障礙小便斗、一般小便斗與殘障坐便立骨對照：扶手補強與靠背補強鋼板位置圖"></figure>
         <div class="col" style="gap:clamp(20px,2.4vw,28px)">
           <p class="lead">無障礙設備的扶手須承受使用者體重，UT 模組於工廠端即在立骨間預先植入 <strong>一體成形鋼板</strong> 補強，確保扶手鎖固點位的結構強度。</p>
           <div class="steps">
